@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const defaultMessage = status.textContent;
     let state = Array(9).fill(null);
     let player = 'X';
+    let gameOver = false;
 
     function checkWinner() {
         for (const [a, b, c] of winningCombos) {
@@ -25,6 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
         square.classList.add("square");
 
         square.addEventListener('click', function () {
+            if (gameOver || state[index] !== null) {
+                return;
+            }
+
             state[index] = player;
             square.textContent = player;
             square.classList.add(player);
@@ -33,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (winner) {
                 status.textContent = 'Congratulations! ' + winner + ' is the Winner!';
                 status.classList.add('you-won');
+                gameOver = true;
                 return;
             }
 
@@ -51,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     newGameBtn.addEventListener('click', function () {
         state = Array(9).fill(null);
         player = 'X';
+        gameOver = false;
 
         squares.forEach(function (square) {
             square.textContent = '';
