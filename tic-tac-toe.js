@@ -7,6 +7,8 @@ const winningCombos = [
 document.addEventListener("DOMContentLoaded", function () {
     const squares = document.querySelectorAll("#board div");
     const status = document.getElementById('status');
+    const newGameBtn = document.querySelector('.btn');
+    const defaultMessage = status.textContent;
     let state = Array(9).fill(null);
     let player = 'X';
 
@@ -44,5 +46,18 @@ document.addEventListener("DOMContentLoaded", function () {
         square.addEventListener('mouseout', function () {
             square.classList.remove('hover');
         });
+    });
+
+    newGameBtn.addEventListener('click', function () {
+        state = Array(9).fill(null);
+        player = 'X';
+
+        squares.forEach(function (square) {
+            square.textContent = '';
+            square.classList.remove('X', 'O', 'hover');
+        });
+
+        status.textContent = defaultMessage;
+        status.classList.remove('you-won');
     });
 });
