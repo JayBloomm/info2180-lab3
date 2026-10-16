@@ -10,6 +10,15 @@ document.addEventListener("DOMContentLoaded", function () {
             square.textContent = player;
             square.classList.add(player);
             player = player === 'X' ? 'O' : 'X';
+
+            square.addEventListener('mouseover', function () {
+            square.classList.add('hover');
+            });
+            
+            square.addEventListener('mouseout', function () {
+            square.classList.remove('hover');
+            });
+
         });
     });
 });
